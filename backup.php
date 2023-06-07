@@ -2,7 +2,7 @@
 require(__DIR__.'/init.php');
 extract(config());
 
-$zips = remote_exec("sudo ls saved/*.zip");
+$zips = $remoteServer->exec("sudo ls saved/*.zip");
 
 if(!is_dir('backups')){
     mkdir('backups');
@@ -14,7 +14,7 @@ foreach(explode("\n",$zips) as $zip){
     $base = basename($zip);
     if(!file_exists($bkp_f=__DIR__."/backups/$base")){
         echo "Copying $zip\n";
-        remote_download("saved/$base", $bkp_f);
+        $remoteServer->download("saved/$base", $bkp_f);
     } else {
         echo "Skipping $zip\n";
     }
@@ -22,7 +22,7 @@ foreach(explode("\n",$zips) as $zip){
         $out = shell_exec("unzip -t $bkp_f");
         if(stristr($out,"no errors detected")){
             echo "Deleting $base at remote\n";
-            remote_exec("rm saved/$base");
+            $remoteServer->exec("rm saved/$base");
         }
     }
 }

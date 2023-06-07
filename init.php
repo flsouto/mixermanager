@@ -8,16 +8,24 @@ function config(){
     }
 }
 
-function remote_exec($cmd){
-    $config = config();
-    return shell_exec("ssh {$config['remote_server']} '(cd {$config['remote_path']}; $cmd)'");
-}
+class RemoteServer{
 
-function remote_download($from, $to){
-    $config = config();
-    shell_exec("scp {$config['remote_server']}:{$config['remote_path']}/$from $to");
-}
+    function __construct(public $host, public $path){
 
+    }
+
+    function exec($cmd){
+        return shell_exec("ssh $this->host '(cd $this->path; $cmd)'");
+    }
+
+    function download($from, $to){
+        shell_exec("scp $this->host:$this->path/$from $to");
+    }
+
+}
 
 extract(config());
+
+$remoteServer = new RemoteServer($remote_server, $remote_path);
+
 
