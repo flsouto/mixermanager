@@ -1,6 +1,5 @@
 <?php
 require(__DIR__.'/init.php');
-extract(config());
 
 $zips = $remoteServer->exec("sudo ls saved/*.zip");
 

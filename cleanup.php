@@ -1,6 +1,7 @@
 <?php
 
 require(__DIR__.'/init.php');
+
 $amount = $argv[1]??10;
 $count = $remoteServer->exec("ls loops/*.mp3 | wc -l");
 
