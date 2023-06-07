@@ -14,5 +14,12 @@ class RemoteServer{
         shell_exec("scp $this->host:$this->path/$from $to");
     }
 
+    function upload($local, $remote=""){
+        if(empty($remote)){
+            $remote = $this->path;
+        }
+        shell_exec("scp $local $this->host:$remote");
+    }
+
 }
 
