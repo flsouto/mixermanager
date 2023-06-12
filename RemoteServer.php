@@ -21,5 +21,9 @@ class RemoteServer{
         shell_exec("scp $local $this->host:$remote");
     }
 
+    function __toString(){
+        return "$this->host:$this->path";
+    }
+
 }
 
