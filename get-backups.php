@@ -17,7 +17,7 @@ foreach(explode("\n",$zips) as $zip){
     } else {
         echo "Skipping $zip\n";
     }
-    if($clear_remote && file_exists($bkp_f)){
+    if($clear_origin && file_exists($bkp_f)){
         $out = shell_exec("unzip -t $bkp_f");
         if(stristr($out,"no errors detected")){
             echo "Deleting $base at remote\n";
