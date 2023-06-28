@@ -25,5 +25,5 @@ foreach(array_slice($zips,0,30) as $zip){
 }
 
 echo "Uploading zip to github\n";
-shell_exec("gh release upload backups gh-backup.zip");
+shell_exec("gh release upload backups gh-backup.zip --clobber");
 
