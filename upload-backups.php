@@ -1,4 +1,4 @@
-<?php
+b<?php
 
 require_once(__DIR__."/init.php");
 
@@ -10,8 +10,9 @@ foreach($backup_servers as $server){
     $bserver = new RemoteServer($server['host'], $server['path']);
     $sent = array_filter( explode("\n",$bserver->exec("ls")) );
 
-    foreach($zips as $zip){
-        if(!in_array($base=basename($zip), $sent)){
+    foreach($zips as $i => $zip){
+        $is_current = !$i;
+        if(!in_array($base=basename($zip), $sent)||$is_current){
             echo "Sending $base to $bserver\n";
             $bserver->upload($zip);
         }
